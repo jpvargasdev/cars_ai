@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Self Drive</title>
+    <script src="bundle.js"></script>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="canvas-container" >
+      <canvas id="car-canvas"></canvas>
+      <div class="buttons-container">
+        <label for="fileInput" class="file-input-label">
+          📂
+          <input
+            type="file"
+            id="fileInput"
+            accept=".world"
+          />
+        </label>
+      </div>
+    </div>
+
+    <div class="canvas-container" >
+      <canvas id="network-canvas"></canvas>
+      <div class="buttons-container">
+        <button id="save-network">💾</button>
+        <button id="discard-network">🗑️</button>
+      </div>
+    </div>
+  </body>
+</html>
