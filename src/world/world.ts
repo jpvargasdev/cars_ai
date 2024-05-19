@@ -323,6 +323,7 @@ export class World {
 		ctx: CanvasRenderingContext2D,
 		viewPoint: Point,
 		showStartMarkings = true,
+		renderRadius = 1000,
 	): void {
 		this.updateLights();
 
@@ -351,7 +352,9 @@ export class World {
 			this.bestCar.draw(ctx, true);
 		}
 
-		const items = [...this.buildings, ...this.trees];
+		const items = [...this.buildings, ...this.trees].filter(
+			(i) => i.base.distanceToPoint(viewPoint) < renderRadius,
+		);
 		items.sort(
 			(a, b) =>
 				b.base.distanceToPoint(viewPoint) - a.base.distanceToPoint(viewPoint),

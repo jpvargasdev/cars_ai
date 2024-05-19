@@ -12,10 +12,12 @@ import {
 export class Segment {
 	p1: Point;
 	p2: Point;
+	oneWay: boolean;
 
-	constructor(p1: Point, p2: Point) {
+	constructor(p1: Point, p2: Point, oneWay = false) {
 		this.p1 = p1;
 		this.p2 = p2;
+		this.oneWay = oneWay;
 	}
 
 	length(): number {
@@ -64,6 +66,9 @@ export class Segment {
 		ctx.lineWidth = width;
 		ctx.strokeStyle = color;
 		ctx.lineCap = cap;
+		if (this.oneWay) {
+			dash = [4, 4];
+		}
 		ctx.setLineDash(dash);
 		ctx.moveTo(this.p1.x, this.p1.y);
 		ctx.lineTo(this.p2.x, this.p2.y);

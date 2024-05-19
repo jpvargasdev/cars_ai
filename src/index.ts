@@ -15,4 +15,4 @@ btnCarSimulator?.addEventListener("click", () => {
 
 const worldEditor = new WorldEditor();
 const carSimulator = new CarSimulation();
-worldEditor.hide();
+carSimulator.hide();

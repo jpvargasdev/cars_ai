@@ -180,6 +180,10 @@ export function getIntersection(
 	return null;
 }
 
+export function degToRad(deg: number) {
+	return deg * (Math.PI / 180);
+}
+
 /**
  * Performs linear interpolation between two values.
  * @param a The starting value.
@@ -189,6 +193,10 @@ export function getIntersection(
  */
 export function lerp(a: number, b: number, t: number): number {
 	return a + (b - a) * t;
+}
+
+export function invLerp(a: number, b: number, v: number) {
+	return (v - a) / (b - a);
 }
 
 /**

@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
+    <div class="buttons-tab" class="hidden">
+      <button id="world-editor" class="inactive">World Editor</button>
+      <button id="car-simulator" class="active">Car Simulator</button>
+    </div>
     <div>
-      <div class="buttons-tab" class="hidden">
-        <button id="world-editor" class="inactive">World Editor</button>
-        <button id="car-simulator" class="active">Car Simulator</button>
-      </div>
       <div id="world-container" class="canvas-container">
         <canvas id="world-canvas"></canvas>
         <div class="buttons-container">
@@ -23,8 +23,14 @@
               accept=".world"
             />
           </label>
+          <button id="openStreetMapBtn">🗺️</button>
           <button id="btn-save">💾</button>
           <button id="btn-discard">🗑️</button>
+          &nbsp;
+          &nbsp;
+          &nbsp;
+          &nbsp;
+
           <button id="graphBtn" class="disabled">🌐</button>
           <button id="stopBtn" class="disabled">🛑</button>
           <button id="yieldBtn" class="disabled">⚠️</button>
@@ -33,6 +39,14 @@
           <button id="lightBtn" class="disabled">🚦</button>
           <button id="startBtn" class="disabled">🚙</button>
           <button id="targetBtn" class="disabled">🎯</button>
+
+          <div id="osmPanel">
+            <textarea id="osmDataContainer" rows="10" cols="50" placeholder="OpenStreetMap XML"></textarea>
+            <div>
+              <button id="loadOsmBtn">✔️</button>
+              <button id="closeOsmPanel">❌</button>
+            </div>
+          </div>
         </div>
       </div>
 

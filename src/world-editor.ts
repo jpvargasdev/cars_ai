@@ -10,6 +10,7 @@ import { TargetEditor } from "./world/editors/target-editor";
 import { ParkingEditor } from "./world/editors/parking-editor";
 import { LightEditor } from "./world/editors/light-editor";
 import { YieldEditor } from "./world/editors/yield-editor";
+import { Osm } from "./world/math/osm";
 
 export class WorldEditor {
 	private btnSave: HTMLElement | null;
@@ -22,10 +23,15 @@ export class WorldEditor {
 	private lightBtn: HTMLElement | null;
 	private startBtn: HTMLElement | null;
 	private targetBtn: HTMLElement | null;
+	private closeOsmPanelBtn: HTMLElement | null;
+	private loadOsmPanelBtn: HTMLElement | null;
+	private openStreetMapBtn: HTMLElement | null;
+	private osmPanel: HTMLElement | null;
 	private input: HTMLElement | null;
 	private title: HTMLElement | null;
 	private canvas: HTMLCanvasElement;
 	private ctx: CanvasRenderingContext2D | null;
+	private osmDataContainer: HTMLTextAreaElement | null;
 	private world: World;
 	private worldContainer: HTMLDivElement;
 	private graph: Graph;
@@ -44,6 +50,13 @@ export class WorldEditor {
 		this.lightBtn = document.getElementById("lightBtn");
 		this.startBtn = document.getElementById("startBtn");
 		this.targetBtn = document.getElementById("targetBtn");
+		this.openStreetMapBtn = document.getElementById("openStreetMapBtn");
+		this.closeOsmPanelBtn = document.getElementById("closeOsmPanel");
+		this.loadOsmPanelBtn = document.getElementById("loadOsmBtn");
+		this.osmDataContainer = document.getElementById(
+			"osmDataContainer",
+		) as HTMLTextAreaElement;
+		this.osmPanel = document.getElementById("osmPanel");
 		this.input = document.getElementById("fileInput");
 		this.title = document.getElementById("title");
 		this.worldContainer = document.getElementById(
@@ -154,11 +167,41 @@ export class WorldEditor {
 		if (this.input) {
 			this.input.addEventListener("change", this.load.bind(this));
 		}
+		if (this.openStreetMapBtn) {
+			this.openStreetMapBtn.addEventListener(
+				"click",
+				this.openStreetMap.bind(this),
+			);
+		}
+		if (this.closeOsmPanelBtn) {
+			this.closeOsmPanelBtn.addEventListener(
+				"click",
+				this.closeOsmPanel.bind(this),
+			);
+		}
+		if (this.loadOsmPanelBtn) {
+			this.loadOsmPanelBtn.addEventListener(
+				"click",
+				this.parseOsmData.bind(this),
+			);
+		}
+	}
+
+	private openStreetMap() {
+		if (this.osmPanel) {
+			this.osmPanel.style.display = "flex";
+		}
+	}
+
+	private closeOsmPanel() {
+		if (this.osmPanel) {
+			this.osmPanel.style.display = "none";
+		}
 	}
 
 	private resizeCanvas() {
-		this.canvas.width = window.innerWidth * 0.8;
-		this.canvas.height = window.innerHeight * 0.8;
+		this.canvas.width = window.innerWidth * 0.95;
+		this.canvas.height = window.innerHeight * 0.9;
 	}
 
 	private animate() {
@@ -243,6 +286,25 @@ export class WorldEditor {
 			button.style.filter = "";
 			editor.enable();
 		}
+	}
+
+	private parseOsmData() {
+		if (this.osmDataContainer?.value === "") {
+			alert("No OSM data provided");
+			return;
+		}
+		if (
+			this.osmDataContainer &&
+			this.osmDataContainer.value &&
+			this.osmDataContainer.value.length > 0
+		) {
+			const { points, segments } = Osm.parseRoads(
+				JSON.parse(this.osmDataContainer.value),
+			);
+			this.graph.points = points;
+			this.graph.segments = segments;
+		}
+		this.closeOsmPanel();
 	}
 
 	public hide() {

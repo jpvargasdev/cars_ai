@@ -2,6 +2,7 @@ export class Point {
 	constructor(
 		public x: number,
 		public y: number,
+		public id: number | undefined = undefined,
 	) {}
 
 	equals(point: Point): boolean {
