@@ -319,7 +319,11 @@ export class World {
 		return bases.map((b) => new Building(b));
 	}
 
-	draw(ctx: CanvasRenderingContext2D, viewPoint: Point, showStartMarkings = true): void {
+	draw(
+		ctx: CanvasRenderingContext2D,
+		viewPoint: Point,
+		showStartMarkings = true,
+	): void {
 		this.updateLights();
 
 		for (const env of this.envelopes) {

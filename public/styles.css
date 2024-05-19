@@ -23,6 +23,39 @@ h1 {
   background: black;
 }
 
+#world-canvas {
+  background: #2a5;
+}
+
+.active {
+  background-color: lightblue;
+}
+
+.inactive {
+  background-color: gray;
+}
+
+.hidden {
+  display: none;
+}
+
+.buttons-tab {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: lightgray;
+  padding: 5px;
+}
+
+.canvas-row {
+  display: flex;
+  flex-direction: row;
+}
+
 .buttons-container {
   display: flex;
   flex-direction: row;
@@ -54,6 +87,9 @@ button:hover {
   transition: transform 0.1s ease; /* Add transition for smooth animation */
 }
 
+.disabled {
+  cursor: not-allowed;
+}
 
 /* Styles for btn-dispose */
 #btn-dispose:hover,
@@ -95,19 +131,6 @@ button:hover {
   background-color: red;
   opacity: 0;
   cursor: pointer;
-}
-
-#controls {
-  position: fixed;
-  top: 0;
-  right: 0;
-  height: 100%; /* Ensures the controls fill the entire height of the viewport */
-  display: flex;
-  flex-direction: column-reverse;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 10px; /* Adjust padding as needed */
-  background-color: #cecece; /* Background color for the controls */
 }
 
 #osmPanel {

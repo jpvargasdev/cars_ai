@@ -7,25 +7,56 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <div class="canvas-container" >
-      <canvas id="car-canvas"></canvas>
-      <div class="buttons-container">
-        <label for="fileInput" class="file-input-label">
-          📂
-          <input
-            type="file"
-            id="fileInput"
-            accept=".world"
-          />
-        </label>
+    <div>
+      <div class="buttons-tab" class="hidden">
+        <button id="world-editor" class="inactive">World Editor</button>
+        <button id="car-simulator" class="active">Car Simulator</button>
       </div>
-    </div>
+      <div id="world-container" class="canvas-container">
+        <canvas id="world-canvas"></canvas>
+        <div class="buttons-container">
+          <label for="fileInput" class="file-input-label">
+            📂
+            <input
+              type="file"
+              id="fileInput"
+              accept=".world"
+            />
+          </label>
+          <button id="btn-save">💾</button>
+          <button id="btn-discard">🗑️</button>
+          <button id="graphBtn" class="disabled">🌐</button>
+          <button id="stopBtn" class="disabled">🛑</button>
+          <button id="yieldBtn" class="disabled">⚠️</button>
+          <button id="crossingBtn" class="disabled">🚶</button>
+          <button id="parkingBtn"class="disabled" >🅿️</button>
+          <button id="lightBtn" class="disabled">🚦</button>
+          <button id="startBtn" class="disabled">🚙</button>
+          <button id="targetBtn" class="disabled">🎯</button>
+        </div>
+      </div>
 
-    <div class="canvas-container" >
-      <canvas id="network-canvas"></canvas>
-      <div class="buttons-container">
-        <button id="save-network">💾</button>
-        <button id="discard-network">🗑️</button>
+      <div id="simulation-container" class="canvas-row">
+        <div class="canvas-container">
+          <canvas id="car-canvas"></canvas>
+          <div class="buttons-container">
+            <label for="fileInput" class="file-input-label">
+              📂
+              <input
+                type="file"
+                id="fileInput"
+                accept=".world"
+              />
+            </label>
+          </div>
+        </div>
+        <div class="canvas-container" >
+          <canvas id="network-canvas"></canvas>
+          <div class="buttons-container">
+            <button id="save-network">💾</button>
+            <button id="discard-network">🗑️</button>
+          </div>
+        </div>
       </div>
     </div>
   </body>

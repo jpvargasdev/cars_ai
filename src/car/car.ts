@@ -10,8 +10,8 @@ export class Car {
 	width: number;
 	height: number;
 	speed: number = 0;
-	acceleration: number = 0.9;
-	maxSpeed: number = 1;
+	acceleration: number = 1;
+	maxSpeed: number = 3;
 	friction: number = 0.05;
 	angle: number = 0;
 	sensor: Sensor | null = null;
@@ -31,7 +31,7 @@ export class Car {
 		height: number,
 		controlType: ControlType,
 		angle: number = 0,
-		maxSpeed: number = 1,
+		maxSpeed: number = 3,
 		color = "blue",
 	) {
 		this.x = x;
