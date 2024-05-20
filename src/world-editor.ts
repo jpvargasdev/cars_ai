@@ -41,7 +41,7 @@ export class WorldEditor {
 
 	constructor() {
 		this.btnSave = document.getElementById("btn-save");
-		this.btnDelete = document.getElementById("btn-dispose");
+		this.btnDelete = document.getElementById("btn-discard");
 		this.btnGraph = document.getElementById("graphBtn");
 		this.btnStop = document.getElementById("stopBtn");
 		this.yieldBtn = document.getElementById("yieldBtn");

@@ -6,17 +6,21 @@ import { angle, scale } from "./world/math/utils";
 import { Point } from "./world/primitives/point";
 import { Viewport } from "./world/viewport";
 import { World } from "./world/world";
+import defaultWorld from "./world/saves/default.json";
+import { MiniMap } from "./visualizer/minimap";
 
 export class CarSimulation {
 	private simulationContainer: HTMLDivElement;
 	private worldCanvas: HTMLCanvasElement;
 	private networkCanvas: HTMLCanvasElement;
+	private minimapCanvas: HTMLCanvasElement;
 	private saveNetworkBtn: HTMLButtonElement;
 	private discardNetworkBtn: HTMLButtonElement;
 	private carCtx: CanvasRenderingContext2D | null;
 	private networkCtx: CanvasRenderingContext2D | null;
 	private world: World;
 	private viewport: Viewport;
+	private minimap: MiniMap;
 	private cars: Car[];
 	private bestCar: Car;
 	private traffic: Car[] = [];
@@ -28,6 +32,9 @@ export class CarSimulation {
 		) as HTMLCanvasElement;
 		this.networkCanvas = document.getElementById(
 			"network-canvas",
+		) as HTMLCanvasElement;
+		this.minimapCanvas = document.getElementById(
+			"minimap-canvas",
 		) as HTMLCanvasElement;
 		this.saveNetworkBtn = document.getElementById(
 			"save-network",
@@ -43,12 +50,12 @@ export class CarSimulation {
 		this.saveNetworkBtn.addEventListener("click", this.save.bind(this));
 		this.discardNetworkBtn.addEventListener("click", this.discard.bind(this));
 
-		this.networkCanvas.height = window.innerHeight * 0.9;
+		this.networkCanvas.height = window.innerHeight * 0.9 - 300;
 		this.worldCanvas.width = window.innerWidth - 350;
 		this.worldCanvas.height = window.innerHeight * 0.9;
 
-		const worldString = localStorage.getItem("world");
-		const worldInfo: World = worldString ? JSON.parse(worldString) : null;
+		// const worldString = localStorage.getItem("world");
+		// const worldInfo: World = worldString ? JSON.parse(worldString) : null;
 
 		this.carCtx = this.worldCanvas.getContext("2d");
 		this.networkCtx = this.networkCanvas.getContext("2d");
@@ -57,12 +64,17 @@ export class CarSimulation {
 			throw new Error("Could not get 2d context");
 		}
 
-		this.world = worldInfo ? World.load(worldInfo) : new World(new Graph());
+		//@ts-check
+		this.world = defaultWorld
+			? World.load(defaultWorld)
+			: new World(new Graph());
 		this.viewport = new Viewport(
 			this.worldCanvas,
 			this.world.zoom,
 			this.world.offset,
 		);
+
+		this.minimap = new MiniMap(this.minimapCanvas, this.world.graph);
 
 		this.roadBorders = this.world.roadBorders.map((s) => [s.p1, s.p2]);
 
@@ -149,7 +161,7 @@ export class CarSimulation {
 
 		const viewPoint = scale(this.viewport.getOffset(), -1);
 		this.world.draw(this.carCtx, viewPoint, false);
-
+		this.minimap.update(viewPoint);
 		for (let i = 0; i < this.traffic.length; i++) {
 			this.traffic[i].draw(this.carCtx);
 		}

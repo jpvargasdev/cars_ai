@@ -15,7 +15,7 @@ export class Viewport {
 	};
 	isCommandKeyPressed: boolean;
 
-	constructor(canvas: HTMLCanvasElement, zoom = 2.0, offset?: Point) {
+	constructor(canvas: HTMLCanvasElement, zoom = 3, offset?: Point) {
 		this.canvas = canvas;
 		this.ctx = canvas.getContext("2d");
 		this.zoom = zoom;

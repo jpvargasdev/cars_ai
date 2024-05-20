@@ -26,6 +26,13 @@ h1 {
   background: #2a5;
 }
 
+#minimap-canvas {
+  background: black;
+  border-radius: 50%;
+  border-color: greenyellow;
+  border-width: 3px;
+}
+
 .active {
   background-color: lightblue;
 }
@@ -65,9 +72,12 @@ h1 {
 .canvas-container {
   display: flex;
   flex-direction: column;
-  margin: 0px 10px;
   background-color: lightgrey;
   border: 1px solid black;
+}
+
+.column {
+  flex-direction: column;
 }
 
 button {
